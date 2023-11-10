@@ -1,3 +1,3 @@
 console.log('hi');
 
-const client
+const client = new 
