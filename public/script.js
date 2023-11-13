@@ -27,6 +27,7 @@ function updataTodo() {
   .then(()=> console.log('데이터 전송 완료'))
   .cathch((err)=>{console.log(err, "에러발생")});
 }
+
 function addTodo() {
   let value = document.getElementById('userInput').value;
   fetch(`/todos`, {
@@ -43,10 +44,20 @@ function addTodo() {
     console.log("todo입니다.");
     console.table(todo);
     let todoList = document.getElementById('todoList');
-    todoList.innerHTML += `<div>${todo.title}</div>`;
+    todoList.innerHTML += `<div class="lists">${todo.title}</div>`;
   })
   .catch(err => console.error(err))
 }
+
 function deleteTodo() {
   // delete 요청 구현
+  console.log("deleteTodo시작");
+  // delete 요청 구현
+  fetch(`/todos/{id}`, {
+    method : 'DELETE',
+    headers : { 'Content-Type' : 'application/json'},
+    body : JSON.stringify({ title }),
+  })
+  .then(()=> console.log('데이터 전송 완료'))
+  .cathch((err)=>{console.log(err, "에러발생")});
 }

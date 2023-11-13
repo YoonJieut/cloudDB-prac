@@ -27,9 +27,8 @@ const Todo = mongoose.model('Todo', todoSchema);
 
 // controller Part -----------------
 // ! express.json은 파싱하기 위해, 위에 존재해야 한다.
-app.use(express.json());// JSON 요청 본문을 처리하기 위한 미들웨어
-// bodyParser를 사용하여 URL encoded form 데이터를 파싱합니다.
-// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+// JSON 요청 본문을 처리하기 위한 미들웨어
 // 정적 파일을 제공하기 위해 express.static 미들웨어를 사용합니다.
 app.use(express.static('public'));
 
