@@ -14,7 +14,10 @@ mongoose.connect(process.env.uri) // 연결 성공
 const Todo = mongoose.model('Todo', new mongoose.Schema({
   title : String,
   description : String,
-  completed : Boolean
+  completed : Boolean,
+  consoleLog (el) {
+    console.log(el);
+  }
 }));
 
 // DB 전용 라우터
@@ -31,7 +34,16 @@ app.post('/todos', async(req, res)=>{
   res.send(newTodo);
 })
 // 이하 put 및 delete 라우트 구현
+app.put('/todos/:id', async (req, res) => {
+  const updatedTodo = await Todo.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  res.send(updatedTodo);
+});
 
+// DELETE /todos/:id
+app.delete('/todos/:id', async (req, res) => {
+  const deletedTodo = await Todo.findByIdAndDelete(req.params.id);
+  res.send(deletedTodo);
+});
 
 
 // controller Part -----------------
