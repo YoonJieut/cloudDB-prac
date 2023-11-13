@@ -18,9 +18,9 @@ const todoSchema = new mongoose.Schema({
   completed : Boolean
 })
 // 스키마 메소드를 통해 프로토타입 메소드를 설정
-todoSchema.methods.consoleLogId = function(){
-  console.log(this._id);
-}
+// todoSchema.methods.consoleLogId = function(){
+//   console.log(this._id);
+// }
 
 const Todo = mongoose.model('Todo', todoSchema);
 
@@ -38,6 +38,7 @@ app.post('/todos', async(req, res)=>{
   res.send(newTodo);
 })
 // 이하 put 및 delete 라우트 구현
+// ! :id는 문법 오류가 아니라, 이 자리를 대체해서 id가 들어가게 된다.
 app.put('/todos/:id', async (req, res) => {
   const updatedTodo = await Todo.findByIdAndUpdate(req.params.id, req.body, { new: true });
   res.send(updatedTodo);
@@ -53,6 +54,11 @@ app.delete('/todos/:id', async (req, res) => {
 // controller Part -----------------
 
 app.use(express.json());// JSON 요청 본문을 처리하기 위한 미들웨어
+// bodyParser를 사용하여 URL encoded form 데이터를 파싱합니다.
+// app.use(bodyParser.urlencoded({ extended: true }));
+// 정적 파일을 제공하기 위해 express.static 미들웨어를 사용합니다.
+app.use(express.static('public'));
+
 
 app.get('/', (req, res)=>{
   res.send('hello world');

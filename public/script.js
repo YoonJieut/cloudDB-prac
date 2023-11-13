@@ -7,16 +7,16 @@
  */
 
 console.log('script.js');
+console.log(document.getElementById('userInput'));
 function updataTodo() {
   console.log("updataTodo시작");
-  let title = document.getElementById('todoList').value;
+  let title = document.getElementById('userInput').value;
   // put 요청 구현
-  fetch(`/todos/${id}`, {
+  fetch(`/todos/{id}`, {
     method : 'PUT',
     headers : { 'Content-Type' : 'application/json'},
     body : JSON.stringify({ title }),
   })
-
 }
 function deleteTodo() {
   // delete 요청 구현
