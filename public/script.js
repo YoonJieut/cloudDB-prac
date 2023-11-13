@@ -9,27 +9,15 @@
 console.log('script.js');
 function updataTodo() {
   console.log("updataTodo시작");
-  const id = 0;
-  // let title = document.getElementById('todoList').value;
+  let title = document.getElementById('todoList').value;
   // put 요청 구현
-  // fetch(`/todos/${id}`, {
-  //   method : 'PUT',
-  //   headers : { 'Content-Type' : 'application/json'},
-  //   body : JSON.stringify({ title }),
-  // })
-  
-  const addId = function(){
-    console.log("이전 기록", id);
-    id ++;
-  }
-  addId();
-  console.log('현재 id : ', id);
+  fetch(`/todos/${id}`, {
+    method : 'PUT',
+    headers : { 'Content-Type' : 'application/json'},
+    body : JSON.stringify({ title }),
+  })
+
 }
-function Todo() {
+function deleteTodo() {
   // delete 요청 구현
 }
-
-
-updataTodo();
-updataTodo();
-updataTodo();
