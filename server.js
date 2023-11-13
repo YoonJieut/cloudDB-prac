@@ -17,14 +17,12 @@ const todoSchema = new mongoose.Schema({
   description : String,
   completed : Boolean
 })
+// 스키마 메소드를 통해 프로토타입 메소드를 설정
 todoSchema.methods.consoleLogId = function(){
   console.log(this._id);
 }
 
 const Todo = mongoose.model('Todo', todoSchema);
-
-// 스키마 메소드를 통해 프로토타입 메소드를 설정
-Todo.
 
 // DB 전용 라우터
 // find를 통해 읽어오기 //[] 확인완료
