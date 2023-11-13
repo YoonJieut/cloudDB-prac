@@ -11,15 +11,21 @@ mongoose.connect(process.env.uri) // 연결 성공
   .catch((err)=>{ console.error("연결 실패", err)});
 
 // 스키마 설정
-const Todo = mongoose.model('Todo', new mongoose.Schema({
-  id : String,
+// * 몽고 디비는 document에 자동으로 _id 항목이 추가되기 때문에 id를 만들 필요가 없다.
+const todoSchema = new mongoose.Schema({
   title : String,
   description : String,
-  completed : Boolean,
-  consoleLogId () {
-    console.log(this.id);
-  }
-}));
+  completed : Boolean
+})
+todoSchema.methods.consoleLogId = function(){
+  console.log(this._id);
+}
+
+const Todo = mongoose.model('Todo', 
+);
+
+// 스키마 메소드를 통해 프로토타입 메소드를 설정
+Todo.
 
 // DB 전용 라우터
 // find를 통해 읽어오기 //[] 확인완료
