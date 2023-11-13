@@ -18,7 +18,7 @@ const Todo = mongoose.model('Todo', new mongoose.Schema({
 }));
 
 // DB 전용 라우터
-// find를 통해 읽어오기
+// find를 통해 읽어오기 //[] 확인완료
 app.get('/todo', async(req, res)=>{
   const todos = await Todo.find();
   res.send(todos);
