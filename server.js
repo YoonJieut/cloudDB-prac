@@ -12,11 +12,12 @@ mongoose.connect(process.env.uri) // 연결 성공
 
 // 스키마 설정
 const Todo = mongoose.model('Todo', new mongoose.Schema({
+  id : String,
   title : String,
   description : String,
   completed : Boolean,
-  consoleLog (el) {
-    console.log(el);
+  consoleLogId () {
+    console.log(this.id);
   }
 }));
 
