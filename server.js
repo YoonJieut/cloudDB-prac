@@ -21,8 +21,7 @@ todoSchema.methods.consoleLogId = function(){
   console.log(this._id);
 }
 
-const Todo = mongoose.model('Todo', 
-);
+const Todo = mongoose.model('Todo', todoSchema);
 
 // 스키마 메소드를 통해 프로토타입 메소드를 설정
 Todo.
