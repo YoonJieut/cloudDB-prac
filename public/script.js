@@ -15,17 +15,25 @@
 
 
 
-function updataTodo() {
-  console.log("updataTodo시작");
-  let title = document.getElementById('userInput').value;
+function updateTodo(todoId) {
+  console.log("updateTodo시작");
+  let updatedtitle = document.getElementById('userInput').value;
   // put 요청 구현
-  fetch(`/todos/{id}`, {
+  fetch(`/todos/${todoId}`, {
     method : 'PUT',
     headers : { 'Content-Type' : 'application/json'},
-    body : JSON.stringify({ title }),
+    body : JSON.stringify({ 
+      title : updatedtitle
+    })
   })
-  .then(()=> console.log('데이터 전송 완료'))
-  .cathch((err)=>{console.log(err, "에러발생")});
+  .then((res)=>res.json())
+  .then((updatedtitle)=>{ 
+    console.log('데이터 전송 완료', updatedtitle)
+    // ui 업데이트 로직
+    let todoList = document.getElementById('todoList');
+    todoList.innerHTML += `<div class="lists">${todo.title}</div>`;
+  })
+  .cathch((err)=>{console.error(err, "에러발생")});
 }
 
 function addTodo() {
@@ -43,21 +51,26 @@ function addTodo() {
   .then(todo => {
     console.log("todo입니다.");
     console.table(todo);
+    // ui 업데이트 로직
     let todoList = document.getElementById('todoList');
-    todoList.innerHTML += `<div class="lists">${todo.title}</div>`;
+    todoList.innerHTML += `
+      <div class="lists" data-id="${todo._id}" onclick="selectTodo(this)">
+        ${todo.title}
+        <!-- 여기에 추가적인 Todo 정보 렌더링 -->
+      </div>
+    `;
   })
   .catch(err => console.error(err))
 }
 
-function deleteTodo() {
+function deleteTodo(todoId) {
   // delete 요청 구현
   console.log("deleteTodo시작");
   // delete 요청 구현
-  fetch(`/todos/{id}`, {
-    method : 'DELETE',
-    headers : { 'Content-Type' : 'application/json'},
-    body : JSON.stringify({ title }),
+  fetch(`/todos/${todoId}`, {
+    method : 'DELETE'
   })
-  .then(()=> console.log('데이터 전송 완료'))
+  .then((res)=>res.json())
+  .then((result)=> console.log('데이터 전송 완료', result))
   .cathch((err)=>{console.log(err, "에러발생")});
 }
