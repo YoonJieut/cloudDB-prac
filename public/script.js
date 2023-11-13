@@ -9,14 +9,28 @@
  * 3-1 add
  * 3-2 updata
  * 3-3 delete
- * 
+ * 3-4 태그들 클릭했을 때, 고유의 id 넘기는 태그
  * 4. add와 updata를 합치기
  */
 
+// ! getAttribute로 속성 값을 html에서 속성값을 전달할 수 있었지!
+let selectedTodoId = null; // 전역 변수로 선택된 Todo의 ID를 저장
+
+function selectTodo(todoElement) {
+  selectedTodoId = todoElement.getAttribute('data-id');
+  // 선택된 Todo의 ID를 전역 변수에 저장
+  // 이제 todoId를 사용하여 deleteTodo, updateTodo 함수를 호출할 수 있습니다.
+  // 예: deleteTodo(todoId);
+  // 혹은 사용자에게 버튼을 보여주어 선택할 수 있게 할 수도 있습니다.
+}
 
 
 function updateTodo(todoId) {
   console.log("updateTodo시작");
+  if (!selectedTodoId) {
+    console.error("No todo selected");
+    return;
+  }
   let updatedtitle = document.getElementById('userInput').value;
   // put 요청 구현
   fetch(`/todos/${todoId}`, {
@@ -69,8 +83,11 @@ function addTodo() {
 }
 
 function deleteTodo(todoId) {
-  // delete 요청 구현
   console.log("deleteTodo시작");
+  if (!selectedTodoId) {
+    console.error("No todo selected");
+    return;
+  }
   // delete 요청 구현
   fetch(`/todos/${todoId}`, {
     method : 'DELETE'
