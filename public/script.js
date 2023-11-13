@@ -31,7 +31,12 @@ function updateTodo(todoId) {
     console.log('데이터 전송 완료', updatedtitle)
     // ui 업데이트 로직
     let todoList = document.getElementById('todoList');
-    todoList.innerHTML += `<div class="lists">${todo.title}</div>`;
+    todoList.innerHTML += `
+    <div class="lists" data-id="${todo._id}" onclick="selectTodo(this)">
+      ${todo.title}
+      <!-- 여기에 추가적인 Todo 정보 렌더링 -->
+    </div>
+    `;
   })
   .cathch((err)=>{console.error(err, "에러발생")});
 }
