@@ -7,4 +7,8 @@ app.get('/', (req, res)=>{
   res.send('hello world');
 });
 
-
+const Port = process.env.Port || 3000;
+app.listen(Port, ()=>{
+  console.log(`http://localhost:${Port}`);
+})
+s
