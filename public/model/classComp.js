@@ -1,4 +1,4 @@
-import Component from "./classicComp";
+import Component from "./classicComp.js";
 
 class TodoList extends Component {
   constructor(props){

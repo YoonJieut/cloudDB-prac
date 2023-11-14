@@ -19,7 +19,7 @@
  * 2-1. 현재 index.html에 적용해보기
  */
 
-import { TodoList } from "./model/classComp.js";
+import TodoList from "./model/classComp.js";
 const addBtn = document.getElementById('addBtn');
 addBtn.addEventListener('click', ()=>{
   let updatedtitle = document.getElementById('userInput').value;
