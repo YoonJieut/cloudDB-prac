@@ -11,6 +11,12 @@
  * 3-3 delete
  * 3-4 태그들 클릭했을 때, 고유의 id 넘기는 태그
  * 4. add와 updata를 합치기
+ * 
+ * Todo2 : React 컴포넌트를 작성한 후 적용해본다.
+ * 1. class 형식 React 작성
+ * 1-1. 현재 index.html에 적용해보기
+ * 2. function 형식 React 작성
+ * 2-1. 현재 index.html에 적용해보기
  */
 
 

@@ -8,7 +8,8 @@ export default class Component {
 
   setState(newState) {
     this.state = { ...this.state, ...newState };
-    this.render()
+    this.render() 
+    // * 여기서 render를 호출하는 이유 : 상태가 바뀌면 다시 랜더링되도록하는 것
   }
 
   render() {
