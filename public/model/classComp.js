@@ -7,7 +7,7 @@ class TodoList extends Component {
       todos : []
     };
   }
-  addTodo(todo) {
+  addTodoMethod(todo) {
     const newTodos = [...this.state.todos, todo];
     this.setState({ todos : newTodos });
   }

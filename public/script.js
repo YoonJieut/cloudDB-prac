@@ -19,15 +19,6 @@
  * 2-1. 현재 index.html에 적용해보기
  */
 
-import TodoList from "./model/classComp.js";
-const addBtn = document.getElementById('addBtn');
-addBtn.addEventListener('click', ()=>{
-  let updatedtitle = document.getElementById('userInput').value;
-  new TodoList().addTodo({
-    title : updatedtitle
-  })
-});
-
 // ! getAttribute로 속성 값을 html에서 속성값을 전달할 수 있었지!
 let selectedTodoId = null; // 전역 변수로 선택된 Todo의 ID를 저장
 
@@ -39,7 +30,6 @@ function selectTodo(todoElement) {
   // 예: deleteTodo(todoId);
   // 혹은 사용자에게 버튼을 보여주어 선택할 수 있게 할 수도 있습니다.
 }
-
 
 function updateTodo() {
   console.log("updateTodo시작");
@@ -125,3 +115,4 @@ function removeItem(todoID){
     todoEl.remove();
   }
 }
+
