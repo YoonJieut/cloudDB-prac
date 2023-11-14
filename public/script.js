@@ -13,11 +13,13 @@
  * 4. add와 updata를 합치기
  */
 
+
 // ! getAttribute로 속성 값을 html에서 속성값을 전달할 수 있었지!
 let selectedTodoId = null; // 전역 변수로 선택된 Todo의 ID를 저장
 
 function selectTodo(todoElement) {
   selectedTodoId = todoElement.getAttribute('data-id');
+  console.log(selectedTodoId);
   // 선택된 Todo의 ID를 전역 변수에 저장
   // 이제 todoId를 사용하여 deleteTodo, updateTodo 함수를 호출할 수 있습니다.
   // 예: deleteTodo(todoId);
@@ -25,7 +27,7 @@ function selectTodo(todoElement) {
 }
 
 
-function updateTodo(todoId) {
+function updateTodo() {
   console.log("updateTodo시작");
   if (!selectedTodoId) {
     console.error("No todo selected");
@@ -33,7 +35,7 @@ function updateTodo(todoId) {
   }
   let updatedtitle = document.getElementById('userInput').value;
   // put 요청 구현
-  fetch(`/todos/${todoId}`, {
+  fetch(`/todos/${selectedTodoId}`, {
     method : 'PUT',
     headers : { 'Content-Type' : 'application/json'},
     body : JSON.stringify({ 
@@ -44,15 +46,16 @@ function updateTodo(todoId) {
   .then((updatedtitle)=>{ 
     console.log('데이터 전송 완료', updatedtitle)
     // ui 업데이트 로직
+    removeItem(selectedTodoId);
     let todoList = document.getElementById('todoList');
     todoList.innerHTML += `
-    <div class="lists" data-id="${todo._id}" onclick="selectTodo(this)">
-      ${todo.title}
+    <div class="lists" data-id="${updatedtitle._id}" onclick="selectTodo(this)">
+      ${updatedtitle.title}
       <!-- 여기에 추가적인 Todo 정보 렌더링 -->
     </div>
     `;
   })
-  .cathch((err)=>{console.error(err, "에러발생")});
+  .catch((err)=>console.log(err, "에러발생"));
 }
 
 function addTodo() {
@@ -82,17 +85,29 @@ function addTodo() {
   .catch(err => console.error(err))
 }
 
-function deleteTodo(todoId) {
+function deleteTodo() {
   console.log("deleteTodo시작");
   if (!selectedTodoId) {
     console.error("No todo selected");
     return;
   }
   // delete 요청 구현
-  fetch(`/todos/${todoId}`, {
+  fetch(`/todos/${selectedTodoId}`, {
     method : 'DELETE'
   })
   .then((res)=>res.json())
-  .then((result)=> console.log('데이터 전송 완료', result))
-  .cathch((err)=>{console.log(err, "에러발생")});
+  .then((result)=> {
+    console.log('데이터 전송 완료', result);
+    removeItem(selectedTodoId);
+  })
+  .catch((err)=>{console.log(err, "에러발생")});
+}
+
+
+// 요소 삭제 로직
+function removeItem(todoID){
+  const todoEl = document.querySelector(`[data-id="${todoID}"]`);
+  if(todoEl) {
+    todoEl.remove();
+  }
 }
